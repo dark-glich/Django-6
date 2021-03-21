@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'main.css' %}">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Q Solve</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="" class="sub" id="sub1">Maths</a>
+        <a href="" class="sub" id="sub2">Science</a>
+        <a href="" class="sub" id="sub3">History</a>
+        <a href="" class="sub" id="sub4">Civics</a>
+        <a href="" class="sub" id="sub5">Economics</a>
+        <a href="" class="sub" id="sub6">Geography</a>
+    </div>
+    {% block content %}  {%endblock content%}
+</body>
+</html>
