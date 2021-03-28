@@ -1,0 +1,45 @@
+<div class="section" style="position: fixed; left:68%; width: 30%;">
+    <div class="sec">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <h1>{{message}}</h1>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h1 style="color: rgb(39, 39, 39); text-align:center;">Leave a Comment</h1>
+        <form method="POST"> {%csrf_token%}
+            {{form.name}}
+            {{form.email}}
+            {{form.Comment}}
+            <button class="btn">Comment</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<div class="section2">
+    <div class="sec">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <h1>{{message}}</h1>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h1 style="color: rgb(39, 39, 39); text-align:center;">Leave a Comment</h1>
+        <form method="POST"> {%csrf_token%}
+            {{form.name}}
+            {{form.email}}
+            {{form.Comment}}
+            <button class="btn">Comment</button>
+        </form>
+        {% endif %}
+    </div>
+</div>

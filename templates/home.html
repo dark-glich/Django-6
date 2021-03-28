@@ -3,24 +3,14 @@
 <h1 class="title">SELECT SUBJECT</h1>
 <div class="container">
     <div class="main">
-        <div class="tag"><a href="" style="color:rgb(39, 39, 39); text-decoration: none;"> Maths </a></div>
-        <div class="tag"><a href="" style="color:rgb(39, 39, 39); text-decoration: none;"> Science </a></div>
-        <div class="tag"><a href="" style="color:rgb(39, 39, 39); text-decoration: none;"> History </a></div>
-        <div class="tag"><a href="" style="color:rgb(39, 39, 39); text-decoration: none;"> Civics </a></div>
-        <div class="tag"><a href="" style="color:rgb(39, 39, 39); text-decoration: none;"> Geography </a></div>
-        <div class="tag"><a href="" style="color:rgb(39, 39, 39); text-decoration: none;"> Economics </a></div>
+        <div class="tag"><a href="{% url 'main:Maths' %}" style="color:rgb(39, 39, 39); text-decoration: none;"> Maths </a></div>
+        <div class="tag"><a href="{% url 'main:Subject' 'Science'%}" style="color:rgb(39, 39, 39); text-decoration: none;"> Science </a></div>
+        <div class="tag"><a href="{% url 'main:Subject' 'History'%}" style="color:rgb(39, 39, 39); text-decoration: none;"> History </a></div>
+        <div class="tag"><a href="{% url 'main:Subject' 'Civics'%}" style="color:rgb(39, 39, 39); text-decoration: none;"> Civics </a></div>
+        <div class="tag"><a href="{% url 'main:Subject' 'Economics'%}" style="color:rgb(39, 39, 39); text-decoration: none;"> Economics  </a></div>
+        <div class="tag"><a href="{% url 'main:Subject' 'Geography'%}" style="color:rgb(39, 39, 39); text-decoration: none;"> Geography </a></div>
     </div>
-    <div class="section" style="position: fixed; left:68%; width: 30%;">
-        <div class="sec">
-            <h1 style="color: rgb(39, 39, 39); text-align:center;">Leave a Comment</h1>
-            <form method="POST">{%csrf_token%}
-                {{form.name}}
-                {{form.email}}
-                {{form.Comment}}
-                <button class="btn">Comment</button>
-            </form>
-        </div>
-    </div>
+    {%include 'comment.html'%}
 </div>
 
-{%endblock content%}
+{%endblock%}

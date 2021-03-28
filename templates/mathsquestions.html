@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{% block content %}
+{% block Math %} Home {% endblock %}
+{% block Mathlink %} {% url 'main:Home' %} {% endblock %}
+<h1 class="title" style="margin-top: 3.5rem;">SELECT CHAPTER</h1>
+<div class="container">
+    <div class="main" style="margin-top: 0.5rem;">
+        <div class="breadcrumb">
+            <a href="{% url 'main:Home' %}" class="anchor" style="margin-left:5px;"> Home </a>
+            <big style="color: white; margin-left:3px;">/</big>
+
+            <a href="{% url 'main:Maths' %}" class="anchor" style="margin-left:5px;"> Maths </a>
+            <big style="color: white; margin-left:3px;">/</big>
+
+            <a href="{% url 'main:MathsChapter' book=book %}" class="anchor" style="margin-left:5px;"> {{book_name}} </a>
+            <big style="color: white; margin-left:3px;">/</big>
+
+            <a href="{% url 'main:MathsExercise' book=book chapter=chapter%}" class="anchor" style="margin-left:5px;"> Chapter - {{chapter}} </a>
+            <big style="color: white; margin-left:3px;">/</big>
+
+            <a href="" class="anchor" style="color:#02FBD4; font-weight: 700;"> Exercise - {{exercise}} </a>
+        </div>
+        {%for question in questions %}
+        <div class="tag"style="font-size: 20px; padding: 2rem 1rem; font-weight:100; width:95%;">
+            <div class=question>
+                <big style="font-size: 150%; color:#00dbba;">{{question.question_no}}.</big>
+                <div>{{question.question}}</div>
+                <hr>
+                <big style="font-size: 120%; ">Solution : </big>
+                <div>{{question.answer}}</div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    {%include 'comment.html'%}
+</div>
+
+{%endblock%}

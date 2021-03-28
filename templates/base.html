@@ -5,20 +5,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'main.css' %}">
     <link rel="shortcut icon" href="" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'main.css' %}">
+    <script src="{%static 'sidebar.js' %}"></script>
     <title>Q Solve</title>
 </head>
 <body>
-    <div class="navbar">
-        <a href="" class="sub" id="sub1">Maths</a>
-        <a href="" class="sub" id="sub2">Science</a>
-        <a href="" class="sub" id="sub3">History</a>
-        <a href="" class="sub" id="sub4">Civics</a>
-        <a href="" class="sub" id="sub5">Economics</a>
-        <a href="" class="sub" id="sub6">Geography</a>
+    <div class="nav">
+        <div class="navigation" style="position: absolute; left: 0px;">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="{% url 'main:Home' %}" class="sub" id="sub1"> Home </a>
+                    <a href="{% url 'main:Maths' %}" class="sub" id="sub1"> Maths </a>
+                    <a href="{% url 'main:Subject' 'Science'%}" class="sub" id="sub2">Science</a>
+                    <a href="{% url 'main:Subject' 'History'%}" class="sub" id="sub3">History </a>
+                    <a href="{% url 'main:Subject' 'Civics'%}" class="sub" id="sub4">Civics</a>
+                    <a href="{% url 'main:Subject' 'Economics'%}" class="sub" id="sub5">Economics</a>
+                    <a href="{% url 'main:Subject' 'Geography'%}" class="sub" id="sub6">Geography</a>
+                </div>
+            </div> 
+        </div>
+
+        <a href="{% url 'main:Home' %}" class="sub" id="sub1"><i class="fa fa-home"></i></a>
+        <a href="{% url 'main:Maths' %}" class="sub" id="sub1"> Maths </a>
+        <a href="{% url 'main:Subject' 'Science'%}" class="sub" id="sub2">Science</a>
+        <a href="{% url 'main:Subject' 'History'%}" class="sub" id="sub3">History </a>
+        <a href="{% url 'main:Subject' 'Civics'%}" class="sub" id="sub4">Civics</a>
+        <a href="{% url 'main:Subject' 'Economics'%}" class="sub" id="sub5">Economics</a>
+        <a href="{% url 'main:Subject' 'Geography'%}" class="sub" id="sub6">Geography</a>
     </div>
     {% block content %}  {%endblock content%}
 </body>

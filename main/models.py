@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Book(models.Model):
     name = models.CharField(max_length=150)
@@ -28,8 +29,11 @@ class Maths(models.Model):
         verbose_name = 'Maths Question'
         verbose_name_plural = 'Maths Questions'
 
+    def get_absolute_url(self):
+        return reverse('main:Maths', kwargs={'book' :self.id})
+
     def __str__(self):
-        return f'chapter = {self.chapter_no} / Exercise = {self.exercise} / Q = {self.question}'
+        return f'chapter = {self.chapter_no} / Exercise = {self.exercise} / Q = {self.question_no}'
 
 class Science(models.Model):
     chapter_name = models.CharField(max_length=156)
@@ -43,7 +47,7 @@ class Science(models.Model):
         verbose_name_plural = 'Science Questions'
 
     def __str__(self):
-        return f'chapter = {self.chapter_no} / Question = {self.question}'
+        return f'chapter = {self.chapter_no} / Question = {self.question_no}'
 
 class History(models.Model):
     chapter_name = models.CharField(max_length=156)
@@ -57,7 +61,7 @@ class History(models.Model):
         verbose_name_plural = 'History Questions'
 
     def __str__(self):
-        return f'chapter = {self.chapter_no} / Question = {self.question}'
+        return f'chapter = {self.chapter_no} / Question = {self.question_no}'
 
 class Civics(models.Model):
     chapter_name = models.CharField(max_length=156)
@@ -71,7 +75,7 @@ class Civics(models.Model):
         verbose_name_plural = 'Civics Questions'
 
     def __str__(self):
-        return f'chapter = {self.chapter_no} / Question = {self.question}'
+        return f'chapter = {self.chapter_no} / Question = {self.question_no}'
 
 class Economics(models.Model):
     chapter_name = models.CharField(max_length=156)
@@ -85,7 +89,7 @@ class Economics(models.Model):
         verbose_name_plural = 'Economics Questions'
 
     def __str__(self):
-        return f'chapter = {self.chapter_no} / Question = {self.question}'
+        return f'chapter = {self.chapter_no} / Question = {self.question_no}'
 
 class Geography(models.Model):
     chapter_name = models.CharField(max_length=156)
@@ -99,5 +103,8 @@ class Geography(models.Model):
         verbose_name_plural = 'Geography Questions'
 
     def __str__(self):
-        return f'chapter = {self.chapter_no} / Question = {self.question}'
+        return f'chapter = {self.chapter_no} / Question = {self.question_no}'
+
+
+
 
