@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{%static 'main.css' %}">
     <script src="{%static 'sidebar.js' %}"></script>
+    <link rel="shortcut icon" href="{%static 'Q-Christian.png' %}" type="image/x-icon">
     <title>Q Solve</title>
 </head>
 <body>
@@ -41,6 +42,8 @@
         <a href="{% url 'main:Subject' 'Economics'%}" class="sub" id="sub5">Economics</a>
         <a href="{% url 'main:Subject' 'Geography'%}" class="sub" id="sub6">Geography</a>
     </div>
+    <div>
     {% block content %}  {%endblock content%}
+    </div>
 </body>
 </html>

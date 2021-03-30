@@ -13,7 +13,9 @@
             <a href="{% url 'main:MathsChapter' book=book %}" class="anchor" style="color:#02FBD4; font-weight: 700;"> {{book_name}} </a>
         </div>
         {%for chapter in chapters %}
-        <div class="tag" style="font-size: clamp(20px, 2.5vw, 35px); padding: 3rem 0rem;"><a href="{% url 'main:MathsExercise' book=book chapter=chapter.number%}" style="color:rgb(39, 39, 39); text-decoration: none;"> {{chapter.number}} - {{chapter.name}}</a></div>
+        <div class="tag" style="font-size: clamp(20px, 2.5vw, 35px); padding: 3rem 0rem;">
+            <a href="{% url 'main:MathsExercise' book=book chapter=chapter.number%}" > {{chapter.number}} - {{chapter.name}}</a>
+        </div>
         {%endfor%}
     </div>
     {%include 'comment.html'%}

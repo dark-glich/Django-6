@@ -3,7 +3,7 @@
 {% block Math %} Home {% endblock %}
 {% block Mathlink %} {% url 'main:Home' %} {% endblock %}
 <h1 class="title" style="margin-top: 3.5rem;">SELECT BOOK</h1>
-<div class="container">
+<div class="container" style="min-height: 1000px;">
     <div class="main">
         <div class="breadcrumb">
             <a href="{% url 'main:Home' %}" class="anchor" style="margin-left:5px;"> Home </a>
@@ -15,7 +15,5 @@
         {%endfor%}
     </div>
     {%include 'comment.html'%}
-    
 </div>
-
 {%endblock%}

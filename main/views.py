@@ -2,8 +2,11 @@ from django.shortcuts import render
 from .models import *
 from .forms import comments_section
 from django.http import Http404
+from django.apps import apps
 from django.contrib import messages
 
+
+# Comment Section
 def comment_section(request):
     form = comments_section(request.POST or None)
     if form.is_valid():
@@ -12,24 +15,36 @@ def comment_section(request):
         form = comments_section()
     return form
 
+
+# Main Home View
 def HomeView(request):
+    # Accessing the comment section
     form = comment_section(request)
     context = {'form':form}
     return render(request, 'home.html', context)
 
+
+#Books View of Maths
 def MathsView(request):
+    # Accessing the comment section
     form = comment_section(request)
     books = Book.objects.all()
-    return render(request, 'maths.html', {'books':books, 'form':form})
+    return render(request, 'Maths/maths.html', {'books':books, 'form':form})
 
-def FilterMathsView(request, book):
+
+#Chapter View Page for Maths 
+def MathsChapterView(request, book):
+    # Accessing the comment section
     form = comment_section(request)
     maths = Maths.objects.filter(book=book)
     book_name = Book.objects.get(id=book)
+
+    # Creating a list of chapters without repeating ChapterNo & ChapterName
     chapters = []
     for mathbook in maths.all():
         if {"number":mathbook.chapter_no, "name":mathbook.chapter_name} not in chapters:
             chapters.append({"number":mathbook.chapter_no, "name":mathbook.chapter_name})
+
     context = {
         'book':book,
         'maths':maths,
@@ -37,16 +52,21 @@ def FilterMathsView(request, book):
         'book_name':book_name.name,
         'chapters': chapters,
     }
-    return render(request, 'mathsbook.html', context)
+    return render(request, 'Maths/mathsbook.html', context)
 
+
+# Exercise View page for Maths
 def MathsExerciseView(request, book, chapter):
     form = comment_section(request)
     maths = Maths.objects.filter(book=book, chapter_no=int(chapter))
     book_name = Book.objects.get(id=book)
+
+    # Creating a list a exercises without repeating
     exercise = []
     for mathbook in maths.all():
         if mathbook.exercise not in exercise:
             exercise.append(mathbook.exercise)
+
     context = {
         'maths':maths,
         'book':book,
@@ -55,12 +75,15 @@ def MathsExerciseView(request, book, chapter):
         'book_name':book_name.name,
         'exercise': exercise,
     }
-    return render(request, 'mathsexercise.html', context)
+    return render(request, 'Maths/mathsexercise.html', context)
 
+
+# View for question answers page of Maths
 def MathsQuestionView(request, book, chapter, exercise):
     form = comment_section(request)
     book_name = Book.objects.get(id=book)
     questions = Maths.objects.filter(book=book, chapter_no=int(chapter), exercise=exercise)
+
     context = {
         'book':book,
         'form':form, 
@@ -69,72 +92,48 @@ def MathsQuestionView(request, book, chapter, exercise):
         'exercise':exercise,
         'chapter':chapter
     }
-    return render(request, 'mathsquestions.html', context)
+    return render(request, 'Maths/mathsquestions.html', context)
 
+
+# Chapter View page of other subjects
 def SubjectView(request, subject):
+    # Accessing the comment section
     form = comment_section(request)
-    sub_list = ['Science', 'History', 'Civics', 'Geography', 'Economics']
-    if subject in sub_list:
-        if subject == 'Science':
-            sub = Science.objects.all()
-            sub_name = 'Science'
+    # Getting model subject with string subject
+    Model = apps.get_model('main', subject)
+    sub = Model.objects.all()
 
-        if subject == 'History':
-            sub = History.objects.all()
-            sub_name = 'History'
-
-        if subject == 'Civics':
-            sub = Civics.objects.all()
-            sub_name = 'Civics'
-
-        if subject == 'Geography':
-            sub = Geography.objects.all()
-            sub_name = 'Geography'
-
-        if subject == 'Economics':
-            sub = Economics.objects.all()
-            sub_name = 'Economics'
-    else:
-        raise Http404
-
+    # Creating a list of chapters without repeating ChapterNo & ChapterName
     chapters = []
     for i in sub:
-        if {'ChapterNo':i.chapter_no, 'ChapterName':i.chapter_name} not in chapters:
+        if {
+            'ChapterNo':i.chapter_no ,
+            'ChapterName':i.chapter_name
+            } not in chapters:
             chapters.append({'ChapterNo':i.chapter_no, 'ChapterName':i.chapter_name})
-        
+        else:
+            pass
+
     context = {
         'chapters':chapters,
         'form':form,
-        'subject':sub_name
+        'subject': subject
     }
     return render(request, 'Other_Subjects/subject.html', context)
 
-def SubjectChapter(request, subject, chapter):
+
+# View for question answers page of other subjects
+def SubjectQuestionView(request, subject, chapter):
+    # Accessing the comment section
     form = comment_section(request)
-    sub_list = ['Science', 'History', 'Civics', 'Geography', 'Economics']
-    if subject in sub_list:
-        if subject == 'Science':
-            sub = Science.objects.filter(chapter_no=chapter)
-        
-        if subject == 'History':
-            sub = History.objects.filter(chapter_no=chapter)
-
-        if subject == 'Civics':
-            sub = Civics.objects.filter(chapter_no=chapter)
-
-        if subject == 'Geography':
-            sub = Geography.objects.filter(chapter_no=chapter)
-            
-        if subject == 'Economics':
-            sub = Economics.objects.filter(chapter_no=chapter)
-            
-    else:
-        raise Http404
+    # Getting model subject with string subject
+    Model = apps.get_model('main', subject)
+    sub = Model.objects.all()
 
     context = {
         'form':form,
         'questions': sub,
         'subject':subject,
         'chapter':chapter
-        }
+    }
     return render(request, 'Other_Subjects/SubjectQuestion.html', context)
